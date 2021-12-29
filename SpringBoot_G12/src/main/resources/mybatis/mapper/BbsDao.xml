@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.spg12.dao.IBbsDao">
+
+	<select id="list" resultType="com.ezen.spg12.dto.BbsDto">
+		select * from bbs order by id desc
+	</select><!-- 결과가 한 개면 한 개인대로, 여러개면 리스트에 담아서 리턴합니다 -->
+
+	<select id="view" resultType="com.ezen.spg12.dto.BbsDto">
+		select * from bbs where id=#{param1}
+	</select>
+	<!-- 
+	<insert id="write">
+		insert into bbs(id,writer,title,content) 
+		values(bbs_seq.nextVal, #{param1},#{param2},#{param3}) 
+	</insert>
+	 -->
+	<insert id="write" parameterType="com.ezen.spg12.dto.BbsDto">
+		insert into bbs(id,writer,title,content) 
+		values(bbs_seq.nextVal, #{writer},#{title},#{content}) 
+	</insert>
+	
+	<update id="update">
+		update bbs set writer=#{writer}, title=#{title}, content=#{content}
+		where id=#{id}
+		<!-- 
+		update bbs set writer=#{param1}, title=#{param2}, content=#{param3}
+		where id=#{param4} -->
+	</update>
+	
+	<delete id="delete">
+		delete from bbs where id=#{param1}
+	</delete>
+</mapper>

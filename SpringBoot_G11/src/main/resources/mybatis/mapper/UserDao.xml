@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.spg11.dao.IUserDao">
+
+	<select id="list" resultType="com.ezen.spg11.dto.UserDto">
+		select *from myuser
+	</select>
+
+</mapper>
+
+<!-- 
+select id, name from myuser : SQL문
+1. IUserDao의 이름과 그 안에 있는 list 메서드의 이름을 갖고,
+현재 xml 파일에서 namespace는 IUserDao라는 이름 검색,
+안쪽 태그들에서는 list 라는 id를 검색합니다
+2. 검색된 태그 내의 SQL문을 실행
+3. 실행결과를 resultType에 적힌 자료형 형태로 리턴하되 메서드의 리턴형에 맞춰
+List면 List, 형태로 또는 단일 데이터면 단일 데이터 형태로 리턴해줍니다 -->
