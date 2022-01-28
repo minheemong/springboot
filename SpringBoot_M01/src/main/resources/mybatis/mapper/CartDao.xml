@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.ezen.spn01.dao.IOrderDao">
+ 
+ 	<insert id="insertOders">
+		insert into orders(oseq, id) values(orders_seq.nextVal, #{param1} )
+	</insert>
+	
+	<select id="LookupMaxOseq" resultType="_int">
+		select max(oseq) from orders
+	</select>
+	
+	<delete id="deleteCart">
+		delete from cart where cseq=#{param1}
+	</delete>
+	
+	<!-- dto  와 일반 변수가 동시에 파라미터로 전달된 경우 아래와 같이 사용합니다. -->
+	<insert id="insertOderDetail">
+		insert into order_detail(odseq, oseq, pseq, quantity) 
+		values(order_detail_seq.nextval, #{param2}, #{param1.pseq}, #{param1.quantity})
+	</insert>
+	
+	<select id="listOrderByOseq" resultType="com.ezen.spn01.dto.OrderVO">
+		select * from order_view where oseq=#{param1}
+	</select>
+ 
+ 
+ 	<select id="selectOseqOrderIng" resultType="int">
+		select distinct oseq from order_view 
+		where id=#{param1} and result='1' order by oseq desc
+	</select>
+	
+	
+	
+	<select id="oseqListAll" resultType="int">
+		<!-- select distinct oseq from order_view where id=#{param1} order by oseq desc -->
+		select distinct oseq from (select oseq, id from order_view order by result) 
+				where id=#{param1} order by oseq desc
+	</select>
+	
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -5,12 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
+
 <script type="text/javascript">
-window.opener.formm.imgfilename.value='${image}';
+window.opener.frm.imgfilename.value='${image}';
 window.opener.document.getElementById('imageName').innerHTML='${originalFilename}';
 self.close();
 </script>
+
+</head>
+<body>
+
 </body>
 </html>

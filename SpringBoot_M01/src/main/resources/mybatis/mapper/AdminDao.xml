@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.ezen.spn01.dao.IAdminDao">
+ 	
+ 	<select id="workerCheck" resultType="string">
+		select pwd from worker where id=#{param1}
+	</select>
+	
+	<select id="getAllCount" resultType="_int">
+		select count(*) from ${param1} where ${param2} like '%'||#{param3}||'%'
+	</select>
+	
+	<select id="listProduct" resultType="com.ezen.spn01.dto.ProductVO">
+	
+		select * from ( 
+		select * from(
+			select rownum as rn, p.* from ( (select * from product where name  like '%'||#{param2}||'%'   
+			order by pseq desc) p )
+		) where rn &gt;= #{param1.startNum} 
+		) where rn &lt;= #{param1.endNum} 
+		
+	</select>
+	
+	
+	<insert id="insertProduct" parameterType="com.ezen.spn01.dto.ProductVO" >
+		insert into product ( pseq, kind, name, price1, price2, price3, content, image) 
+		        values(product_seq.nextval, #{kind}, #{name}, #{price1}, #{price2}, 
+		        #{price3}, #{content}, #{image})
+	</insert>
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

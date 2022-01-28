@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.ezen.spn01.dao.ICartDao">
+ 
+ 	<insert id="insertCart" parameterType="com.ezen.spn01.dto.CartVO">
+		Insert into cart(cseq, id, pseq, quantity)
+		values(cart_seq.nextval, #{id},  #{pseq} , #{quantity} )
+	</insert>
+	
+	<select id="listCart" resultType="com.ezen.spn01.dto.CartVO">
+		select * from cart_view where id=#{param1} order by cseq desc
+	</select>
+	
+	<delete id="deleteCart" >
+		delete from cart where cseq=#{param1}
+	</delete>
+	
+ </mapper>
